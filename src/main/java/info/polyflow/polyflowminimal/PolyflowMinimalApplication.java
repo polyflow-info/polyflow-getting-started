@@ -1,4 +1,4 @@
-package com.example.polyflowminimal;
+package info.polyflow.polyflowminimal;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
