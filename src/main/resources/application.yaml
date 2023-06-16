@@ -1,21 +1,5 @@
 server:
   port: 8080
-camunda:
-  bpm:
-    admin-user:
-      id: demo
-      password: demo
-      firstName: Demo
-      lastName: Demo
-    login:
-      enabled: true
-      user-id: demo
-    filter:
-      create: All tasks
-    generic-properties:
-      properties:
-        initializeTelemetry: false
-
 spring:
   datasource:
     url: jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;NON_KEYWORDS=VALUE;DB_CLOSE_ON_EXIT=FALSE
@@ -24,3 +8,47 @@ spring:
   h2:
     console:
       enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+    login:
+      enabled: true
+      user-id: demo
+    filter:
+      create: All tasks
+    generic-properties:
+      properties:
+        initializeTelemetry: false
+    eventing:
+      task: false
+
+
+polyflow:
+  integration:
+    collector:
+      camunda:
+        task:
+          enabled: true
+          enricher:
+            type: processVariables
+
+    sender:
+      enabled: true
+      task:
+        enabled: true
+        type: tx
+        send-within-transaction: true # Must be set to true in single node scenario, because the TX of Camunda must be the same as TX of Axon.
+  view:
+    jpa:
+      stored-items: task
+
+axon:
+  serializer:
+    events: jackson
+    general: jackson
+    messages: jackson
