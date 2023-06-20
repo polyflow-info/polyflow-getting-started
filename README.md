@@ -1,17 +1,26 @@
-# Getting Started with Polyflow
-
 [![example](https://img.shields.io/badge/lifecycle-EXAMPLE-blue.svg)](https://github.com/holisticon#open-source-lifecycle)
 [![CI for branches](https://github.com/polyflow-info/polyflow-getting-started/actions/workflows/ci.yml/badge.svg)](https://github.com/polyflow-info/polyflow-getting-started/actions/workflows/ci.yml)
+
+![Logo](https://github.com/polyflow-info/.github/blob/388d58c75fce0fad0956f4c5b5ac8b22b6e3223d/profile/assets/Positive%402x.png)
+## Getting Started with Polyflow
+
+> Polyflow is a component library for building enterprise-wide process platforms with
+multiple process engines like Camunda Platform.
+
+
 
 This repository is an example for settings and configurations to demonstrate the minimal
 steps to integrate an existing process application based on Spring Boot with Polyflow.
 
+
+
 For doing so, we used a simple example from Camunda Platform 7 - the load approval process.
 
-![Loan Approval](src/main/resources/loanApproval.png)
+![Loan Approval](src/main/resources/loanApproval.png | width=200)
 
 Fo more information on Camunda Platform 7 with Spring Boot please check the official [Camunda getting started](https://docs.camunda.org/get-started/spring-boot/) 
 guide.
+
 
 ## How to build
 
