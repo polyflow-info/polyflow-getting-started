@@ -12,6 +12,7 @@ import org.axonframework.eventsourcing.eventstore.jpa.DomainEventEntry;
 import org.axonframework.serialization.Serializer;
 import org.axonframework.serialization.json.JacksonSerializer;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.camunda.bpm.spring.boot.starter.event.PostDeployEvent;
 import org.h2.tools.Server;
@@ -24,50 +25,57 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 @SpringBootApplication
 @EnableProcessApplication
 @EnablePolyflowJpaView
 @EnablePolyflowTaskPool
-@EntityScan(
-        basePackageClasses = {
-                DomainEventEntry.class
-        }
-)
+@EntityScan(basePackageClasses = { DomainEventEntry.class })
 public class PolyflowMinimalApplication {
-    @Autowired
-    private RuntimeService runtimeService;
+  @Autowired
+  private RuntimeService runtimeService;
 
-    public static void main(String[] args) {
-        SpringApplication.run(PolyflowMinimalApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(PolyflowMinimalApplication.class, args);
+  }
 
-    // Create process instance after the application started
-    @EventListener
-    public void processPostDeploy(PostDeployEvent event) {
-        runtimeService.startProcessInstanceByKey("loanApproval");
-    }
+  // Create process instance after the application started
+  @EventListener
+  public void processPostDeploy(PostDeployEvent event) {
+    runtimeService.startProcessInstanceByKey("loanApproval",
+      "LOAN-" + UUID.randomUUID().getMostSignificantBits(),
+      Variables
+        .createVariables()
+        .putValue("EMPLOYEE_ID", "P-" + UUID.randomUUID().getMostSignificantBits())
+        .putValue("REQUEST_TYPE", "loan increase")
+        .putValue("CHANGE_RATE", "10%")
+    );
+  }
 
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    public Server inMemoryH2DatabaseaServer() throws SQLException {
-        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
-    }
+  @Bean(initMethod = "start", destroyMethod = "stop")
+  public Server inMemoryH2DatabaseaServer() throws SQLException {
+    return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
+  }
 
-    /**
-     * Custom object mapper.
-     */
-    @Bean
-    @Qualifier(FallbackPayloadObjectMapperAutoConfiguration.PAYLOAD_OBJECT_MAPPER)
-    ObjectMapper objectMapper() {
-        return ObjectMapperConfigurationHelper.configurePolyflowJacksonObjectMapper(new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .registerModule(new KotlinModule.Builder().build())
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS));
-    }
+  /**
+   * Custom object mapper.
+   */
+  @Bean
+  @Qualifier(FallbackPayloadObjectMapperAutoConfiguration.PAYLOAD_OBJECT_MAPPER)
+  ObjectMapper objectMapper() {
+    return ObjectMapperConfigurationHelper
+      .configurePolyflowJacksonObjectMapper(
+        new ObjectMapper()
+          .registerModule(new JavaTimeModule())
+          .registerModule(new KotlinModule.Builder().build())
+          .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+      );
+  }
 
-    @Bean
-    @Qualifier("eventSerializer")
-    Serializer mySerializer(ObjectMapper objectMapper) {
-        return new JacksonSerializer.Builder().objectMapper(objectMapper).build();
-    }
+  @Bean
+  @Qualifier("eventSerializer")
+  Serializer mySerializer(ObjectMapper objectMapper) {
+    return new JacksonSerializer.Builder().objectMapper(objectMapper).build();
+  }
 }

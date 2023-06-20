@@ -2,14 +2,15 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;NON_KEYWORDS=VALUE;DB_CLOSE_ON_EXIT=FALSE
-    username: demo
-    password: secret
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;NON_KEYWORDS=VALUE;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
   h2:
     console:
       enabled: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: true
 
 camunda:
   bpm:
@@ -26,7 +27,6 @@ camunda:
         initializeTelemetry: false
     eventing:
       task: false
-
 
 polyflow:
   integration:

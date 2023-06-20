@@ -1,117 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.12</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>info.polyflow</groupId>
-    <artifactId>polyflow-minimal-example</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>polyflow-minimal-example</name>
-    <description>polyflow-minimal-example</description>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.12</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>info.polyflow</groupId>
+  <artifactId>polyflow-minimal-example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>polyflow-minimal-example</name>
+  <description>polyflow-minimal-example</description>
 
-    <properties>
-        <java.version>17</java.version>
-        <polyflow.version>3.11.0</polyflow.version>
-    </properties>
+  <properties>
+    <java.version>17</java.version>
+    <polyflow.version>3.11.0</polyflow.version>
+  </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- Polyflow -->
-            <dependency>
-                <groupId>io.holunda.polyflow</groupId>
-                <artifactId>polyflow-taskpool-dependencies</artifactId>
-                <version>${polyflow.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-
-    </dependencyManagement>
+  <dependencyManagement>
     <dependencies>
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <!-- Camunda -->
-        <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-            <version>7.19.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.holunda</groupId>
-            <artifactId>camunda-platform-7-autologin</artifactId>
-            <version>0.0.2</version>
-        </dependency>
-
-        <!-- Polyflow -->
-        <dependency>
-            <groupId>io.holunda.polyflow</groupId>
-            <artifactId>polyflow-camunda-bpm-springboot-starter</artifactId>
-        </dependency>
-        <!-- Polyflow Core -->
-        <dependency>
-            <groupId>io.holunda.polyflow</groupId>
-            <artifactId>polyflow-taskpool-core</artifactId>
-        </dependency>
-        <!-- Polyflow view -->
-        <dependency>
-            <groupId>io.holunda.polyflow</groupId>
-            <artifactId>polyflow-view-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.holunda.polyflow</groupId>
-            <artifactId>polyflow-view-api-client</artifactId>
-        </dependency>
-
-        <!-- Axon -->
-        <dependency>
-            <groupId>org.axonframework</groupId>
-            <artifactId>axon-spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.axonframework</groupId>
-                    <artifactId>axon-server-connector</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- DB -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-
-        <!--    jackson-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-kotlin</artifactId>
-        </dependency>
+      <!-- Polyflow -->
+      <dependency>
+        <groupId>io.holunda.polyflow</groupId>
+        <artifactId>polyflow-taskpool-dependencies</artifactId>
+        <version>${polyflow.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
     </dependencies>
 
+  </dependencyManagement>
+  <dependencies>
+    <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <!-- Camunda -->
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+      <version>7.19.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.holunda</groupId>
+      <artifactId>camunda-platform-7-autologin</artifactId>
+      <version>0.0.2</version>
+    </dependency>
+
+    <!-- Polyflow -->
+    <dependency>
+      <groupId>io.holunda.polyflow</groupId>
+      <artifactId>polyflow-camunda-bpm-springboot-starter</artifactId>
+    </dependency>
+    <!-- Polyflow Core -->
+    <dependency>
+      <groupId>io.holunda.polyflow</groupId>
+      <artifactId>polyflow-taskpool-core</artifactId>
+    </dependency>
+    <!-- Polyflow view -->
+    <dependency>
+      <groupId>io.holunda.polyflow</groupId>
+      <artifactId>polyflow-view-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.holunda.polyflow</groupId>
+      <artifactId>polyflow-view-api-client</artifactId>
+    </dependency>
+
+    <!-- Axon -->
+    <dependency>
+      <groupId>org.axonframework</groupId>
+      <artifactId>axon-spring-boot-starter</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.axonframework</groupId>
+          <artifactId>axon-server-connector</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- DB -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+
+    <!--    jackson-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-kotlin</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

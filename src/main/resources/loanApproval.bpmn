@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0lc1xwd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0lc1xwd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.7.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
   <bpmn:process id="loanApproval" name="Loan Approval" isExecutable="true" camunda:historyTimeToLive="0">
     <bpmn:startEvent id="StartEvent_1" name="Loan Request Received">
       <bpmn:outgoing>Flow_0ybzyw8</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0ybzyw8" sourceRef="StartEvent_1" targetRef="Activity_1djxisr" />
-    <bpmn:userTask id="Activity_1djxisr" name="Check the request">
+    <bpmn:sequenceFlow id="Flow_0ybzyw8" sourceRef="StartEvent_1" targetRef="user_check_request" />
+    <bpmn:userTask id="user_check_request" name="Check the request for ${EMPLOYEE_ID}" camunda:assignee="team-head" camunda:candidateUsers="team-head, department-head, division-head" camunda:candidateGroups="department-management, team-management" camunda:priority="27">
+      <bpmn:documentation>This is a loan request of one of your direct or indirect employees.</bpmn:documentation>
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="foo">bar</camunda:inputParameter>
-          <camunda:inputParameter name="baz">boo</camunda:inputParameter>
+          <camunda:inputParameter name="FOO">bar</camunda:inputParameter>
+          <camunda:inputParameter name="BAZ">boo</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ybzyw8</bpmn:incoming>
@@ -18,7 +19,7 @@
     <bpmn:endEvent id="Event_0eqs1r1" name="Load Request Pricessed">
       <bpmn:incoming>Flow_0x5i4je</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0x5i4je" sourceRef="Activity_1djxisr" targetRef="Event_0eqs1r1" />
+    <bpmn:sequenceFlow id="Flow_0x5i4je" sourceRef="user_check_request" targetRef="Event_0eqs1r1" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="loanApproval">
@@ -28,7 +29,7 @@
           <dc:Bounds x="163" y="142" width="69" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0fibikc_di" bpmnElement="Activity_1djxisr">
+      <bpmndi:BPMNShape id="Activity_0fibikc_di" bpmnElement="user_check_request">
         <dc:Bounds x="270" y="77" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>

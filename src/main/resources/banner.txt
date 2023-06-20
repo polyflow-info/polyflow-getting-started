@@ -17,4 +17,6 @@ ${AnsiColor.WHITE}
   Camunda BPM:  ${camunda.bpm.formatted-version}
   Taskpool:     ${application.formatted-version}
 
-  Cockpit:                        http://localhost:${server.port}/camunda/app/cockpit/
+  Cockpit:      http://localhost:${server.port}/camunda/app/cockpit/
+  Tasklist:     http://localhost:${server.port}/camunda/app/tasklist/
+  H2 Console:   http://localhost:${server.port}/h2-console/
