@@ -16,7 +16,7 @@
 
   <properties>
     <java.version>17</java.version>
-    <polyflow.version>3.11.0</polyflow.version>
+    <polyflow.version>4.4.0</polyflow.version>
   </properties>
 
   <dependencyManagement>
